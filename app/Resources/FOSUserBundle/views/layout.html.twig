@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <div class="mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-card mdl-shadow--2dp" style="min-width: 100%;">
+                <div class="mdl-card__title {{ random(['mdl-color--red-A400', 'mdl-color--indigo-A400', 'mdl-color--light-green-A400 ','mdl-color--green-A400','mdl-color--yellow-A400']) }}">
+
+                    {% block message %}
+                    {% endblock %}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+
+
+
+                    {% if app.request.hasPreviousSession %}
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="flash-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mdl-layout-spacer"></div>
+    </div>
+
+
+{% endblock %}

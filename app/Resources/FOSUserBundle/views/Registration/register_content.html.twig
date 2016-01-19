@@ -1,0 +1,46 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+<div class="mdl-grid">
+    <div class="mdl-cell--6-col">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect"
+           href="{{ path('google_login') }}">
+            Google login
+        </a>
+
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': 'mdl-textfield__input','placeholder':'Email'}}) }}
+        {{ form_label(form.email, " ") }}
+        {{ form_errors(form.username) }}
+        {{ form_widget(form.username, {'attr': {'class': 'mdl-textfield__input','placeholder':'Nom'}}) }}
+        {{ form_label(form.username, " ") }}
+        <br><br>
+        {{ form_errors(form.telephone) }}
+        {{ form_widget(form.telephone, {'attr': {'class': 'mdl-textfield__input','placeholder':'Telephone' }}) }}
+        {{ form_label(form.telephone, " ") }}
+        <br><br>
+        {% for passwordField in form.plainPassword %}
+            {{ form_label(passwordField," ") }}
+            {% if loop.first %}
+                {{ form_widget(passwordField, { 'attr': {'class': 'mdl-textfield__input','placeholder':'Mot de passe'} }) }}
+            {% else %}
+                {{ form_widget(passwordField, { 'attr': {'class': 'mdl-textfield__input','placeholder':'Confirmer mot de passe'} }) }}
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</div>
+<div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell--2-col mdl-cell--middle">
+        <div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored  mdl-color--green-A400">
+                <i class="material-icons">check</i>
+            </button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

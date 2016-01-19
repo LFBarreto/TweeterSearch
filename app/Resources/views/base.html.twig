@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            {% stylesheets '@AppBundle/Resources/public/css/*' filter='uglifycss' filter='cssrewrite' output='css/compiled/main.min.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">TweeterSearch</span>
+                <div class="mdl-layout-spacer"></div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+                    <label class="mdl-button mdl-js-button mdl-button--icon"
+                           for="fixed-header-drawer-exp">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <form method="get" action="{{ path('searchTweet') }}">
+                            <input class="mdl-textfield__input" type="text" name="q"
+                                   id="fixed-header-drawer-exp">
+                        </form>
+                    </div>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-button--icon mdl-js-ripple-effect" id="more-button">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <nav class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+                    <a class="mdl-menu__item" href="{{ path('homepage') }}">Acceuil</a>
+                    {% if app.user is not null %}
+
+                        <div class="mdl-menu__item">Bonjour {{ app.user.username }}</div>
+
+                        <a class="mdl-menu__item" href="{{ path('fos_user_security_logout') }}">Deconnexion</a>
+                    {% else %}
+
+                        <a class="mdl-menu__item" href="{{ path('fos_user_security_login') }}">Connexion</a>
+
+                        <a class="mdl-menu__item" href="{{ path('fos_user_registration_register') }}">Inscription</a>
+
+                    {% endif %}
+
+                </nav>
+
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+
+                    {% block body %}{% endblock %}
+
+            </div>
+        </main>
+    </div>
+    {% block javascripts %}
+        {% javascripts '@AppBundle/Resources/public/js/*' filter='uglifyjs2' output='js/compiled/main.min.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}
+    </body>
+</html>

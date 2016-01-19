@@ -1,0 +1,100 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--4dp">
+            <div class="mdl-card__title  mdl-color--accent " id="message">
+                <h4 class="mdl-card__title-text">{{ message }}</h4>
+            </div>
+            {% if errors  is defined and errors is not empty %}
+                <div class="mdl-shadow--2dp mdl-color--amber-500">{{ errors }}</div>
+            {% endif %}
+                <div class="mdl-card__actions mdl-card--border">
+
+
+
+
+                            <form method="get" action="{{ path('searchTweet') }}">
+
+                        <div class="mdl-layout-spacer">
+                                <input class="mdl-textfield__input" type="text" name="q" placeholder="Effectuer une recherche">
+
+                         </div>
+                                <div mdl-grid>
+                                <div class="mdl-layout-spacer"></div>
+                                <div class="mdl-cell--2-col">
+
+                                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored  mdl-color--accent">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </div>
+                                </div>
+                            </form>
+                    </div>
+
+
+            </div>
+        <div class="mdl-layout-spacer"></div>
+    </div>
+
+        {% if tweets is defined and tweets is not empty %}
+            {% set nbPage=0 %}
+                <div class="scroll">
+                {% for tweet in tweets %}
+                    {% if loop.index%5==0 %}
+                        {{ loop.index }}{% set nbPage=nbPage+1 %}</div><div class="scroll">{% endif %}
+                    <div class="mdl-grid">
+                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-card scroll">
+                        <div class="mdl-card__title {{ random(['mdl-color--red-A400', 'mdl-color--indigo-A400', 'mdl-color--light-green-A400 ','mdl-color--green-A400','mdl-color--yellow-A400']) }}">
+                            <img src="{{ tweet['user_image'] }}" class="section__circle-container__circle mdl-color--primary">
+                            <h5 class="mdl-card__title-text">{{ tweet['screen_name'] }}</h5>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            {{ tweet['text'] }}
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            {{ tweet['created_at'] }}
+                        </div>
+                    </div>
+
+                    <div class="mdl-layout-spacer"></div>
+                    </div>
+
+                {% endfor %}
+                </div>
+        {% endif %}
+    {% if nbPage is defined and nbPage>0 %}
+    <div class="mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+        <button class="mdl-button mdl-button--raised mdl-button--accent next">Suivant</button>
+        <div class="mdl-layout-spacer"></div>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+{% if tweets is defined and tweets is not empty %}
+    <script>
+        var page=0;
+        $('.scroll').hide();
+        $(document).ready(function(){
+            $('.scroll').eq(page).fadeIn(1500);
+            $('.scroll').eq(page+1).fadeIn(1500);
+            $('.scroll').eq(page+2).fadeIn(1500);
+            $('.scroll').eq(page+3).fadeIn(1500);
+            $('.scroll').eq(page+4).fadeIn(1500);
+            $('.next').click(function() {
+                    if(page<20)page+=5;
+                    else $('.next').hide();
+                $('.scroll').eq(page).fadeIn(1500);
+                $('.scroll').eq(page+1).fadeIn(1500);
+                $('.scroll').eq(page+2).fadeIn(1500);
+                $('.scroll').eq(page+3).fadeIn(1500);
+                $('.scroll').eq(page+4).fadeIn(1500);
+            });
+        });
+
+    </script>
+{% endif %}
+{% endblock %}

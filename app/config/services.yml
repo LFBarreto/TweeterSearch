@@ -1,0 +1,21 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+    my_user_provider.class: AppBundle\Services\FOSUBUserProvider
+    my_user_form_registration.class: AppBundle\Form\RegistrationType
+    twitter_search.class: AppBundle\Services\TwitterSearch
+
+services:
+  my_user_provider:
+      class: "%my_user_provider.class%"
+      arguments: [@fos_user.user_manager,{google: google_id}]
+
+  appbundle.registration.form.type:
+            class:  "%my_user_form_registration.class%"
+            arguments: [%fos_user.model.user.class%]
+            tags:
+                - { name: form.type, alias: appbundle_user_registration }
+
+  twitter_search:
+        class: "%twitter_search.class%"
+        arguments: [@endroid.twitter]

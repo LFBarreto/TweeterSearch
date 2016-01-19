@@ -1,0 +1,29 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     tweetBarreto
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    #Google app id for Auth2
+    google_app_id: 1043666664809-agjj6ffq6gkn5pfiee046penl2i76l2s.apps.googleusercontent.com
+    google_app_secret: nutlPvbR9z_9h_aPngiCtM8G
+
+    #Twitter app Key for Auth
+    twitter_consumerkey: BEIMif1u1KqfYuj4FZIc45dA5
+    twitter_consumersecret: 0P4Pt9VzhtE96pCujMPei3h51Wt1nmCFVtVU6YfJZYYb9T3YmK
+    twitter_accesstoken: 4779745332-Y6hRr22amtzXpAOKZWcQInLVuiZtsCfXjythAGt
+    twitter_accesstokensecret: cEI9mnqEZ06BwOxdi8HGx5eUNWVoQiYISso4m2D4R5cKu
