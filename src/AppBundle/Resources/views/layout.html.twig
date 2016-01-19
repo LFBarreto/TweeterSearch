@@ -43,11 +43,17 @@
                 <div class="scroll">
                 {% for tweet in tweets %}
                     {% if loop.index0!=0 and loop.index0%5==0 %}
-                        </div><div class="scroll">
+                        <div class="mdl-grid">
+                            <div class="mdl-layout-spacer"></div>
+                            <a href="#top" class="mdl-button mdl-button--raised mdl-button--fab mdl-button--accent top"><i class="material-icons">arrow_upward</i></a>
+                            <div class="mdl-layout-spacer"></div>
+                        </div>
+                        </div>
+                        <div class="scroll">
                     {% endif %}
                     <div class="mdl-grid">
                     <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-card">
+                    <div class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title {{ random(['mdl-color--red-A400', 'mdl-color--indigo-A400', 'mdl-color--light-green-A400 ','mdl-color--green-A400','mdl-color--yellow-A400']) }}">
                             <img src="{{ tweet['user_image'] }}" class="section__circle-container__circle mdl-color--primary">
                             <h5 class="mdl-card__title-text">{{ tweet['screen_name'] }}</h5>
@@ -69,15 +75,16 @@
             {% if (tweets|length/5)>0 %}
                 <div class="mdl-grid">
                     <div class="mdl-layout-spacer"></div>
-                    <button  class="mdl-button mdl-button--raised mdl-button--fab mdl-button--accent next"><i class="material-icons">arrow_downward</i></button>
+                    <button class="mdl-button mdl-button--raised mdl-button--fab mdl-button--accent next"><i class="material-icons">arrow_downward</i></button>
                     <div class="mdl-layout-spacer"></div>
                 </div>
             {% endif %}
-            <div class="mdl-grid">
+            <div class="mdl-grid last_button">
                 <div class="mdl-layout-spacer"></div>
                 <a href="#top" class="mdl-button mdl-button--raised mdl-button--fab mdl-button--accent top"><i class="material-icons">arrow_upward</i></a>
                 <div class="mdl-layout-spacer"></div>
             </div>
+
         {% endif %}
 
 {% endblock %}
@@ -87,7 +94,7 @@
     <script>
         var page=0;
         $('.scroll').hide();
-        $('.top').hide();
+        $('.last_button').hide();
         $(document).ready(function(){
             $('.scroll').eq(page).fadeIn(1500);
             $('.next').click(function() {
@@ -95,11 +102,21 @@
                     else {
                         page++;
                         $('.next').hide();
-                        $('.top').show();
+                        $('.last_button').show();
                     }
                 $('.scroll').eq(page).fadeIn(1500);
 
             });
+            function scrollToTop(){
+                var aTag = $("#top");
+                $('main').animate({scrollTop: aTag.offset().top},1500,'linear');
+            }
+
+            $(".top").click(function() {
+                scrollToTop();
+            });
+
+
         });
 
     </script>
