@@ -39,14 +39,15 @@
     </div>
 
         {% if tweets is defined and tweets is not empty %}
-            {% set nbPage=0 %}
+
                 <div class="scroll">
                 {% for tweet in tweets %}
-                    {% if loop.index%5==0 %}
-                        {{ loop.index }}{% set nbPage=nbPage+1 %}</div><div class="scroll">{% endif %}
+                    {% if loop.index0!=0 and loop.index0%5==0 %}
+                        </div><div class="scroll">
+                    {% endif %}
                     <div class="mdl-grid">
                     <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-card scroll">
+                    <div class="mdl-cell mdl-cell--8-col mdl-card">
                         <div class="mdl-card__title {{ random(['mdl-color--red-A400', 'mdl-color--indigo-A400', 'mdl-color--light-green-A400 ','mdl-color--green-A400','mdl-color--yellow-A400']) }}">
                             <img src="{{ tweet['user_image'] }}" class="section__circle-container__circle mdl-color--primary">
                             <h5 class="mdl-card__title-text">{{ tweet['screen_name'] }}</h5>
@@ -63,35 +64,35 @@
                     </div>
 
                 {% endfor %}
+
                 </div>
+            {% if (tweets|length/5)>0 %}
+                <div class="mdl-grid">
+                    <div class="mdl-layout-spacer"></div>
+                    <button class="mdl-button mdl-button--raised mdl-button--accent next">Suivant</button>
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+            {% endif %}
         {% endif %}
-    {% if nbPage is defined and nbPage>0 %}
-    <div class="mdl-grid">
-        <div class="mdl-layout-spacer"></div>
-        <button class="mdl-button mdl-button--raised mdl-button--accent next">Suivant</button>
-        <div class="mdl-layout-spacer"></div>
-    </div>
-    {% endif %}
+
 {% endblock %}
 {% block scripts %}
 {% if tweets is defined and tweets is not empty %}
+    {% set nbPage=(tweets|length/5) %}
+    {{ nbPage }}
     <script>
         var page=0;
         $('.scroll').hide();
         $(document).ready(function(){
             $('.scroll').eq(page).fadeIn(1500);
-            $('.scroll').eq(page+1).fadeIn(1500);
-            $('.scroll').eq(page+2).fadeIn(1500);
-            $('.scroll').eq(page+3).fadeIn(1500);
-            $('.scroll').eq(page+4).fadeIn(1500);
             $('.next').click(function() {
-                    if(page<20)page+=5;
-                    else $('.next').hide();
+                    if(page<{{ nbPage-2 }}) page++;
+                    else {
+                        page++;
+                        $('.next').hide();
+                    }
                 $('.scroll').eq(page).fadeIn(1500);
-                $('.scroll').eq(page+1).fadeIn(1500);
-                $('.scroll').eq(page+2).fadeIn(1500);
-                $('.scroll').eq(page+3).fadeIn(1500);
-                $('.scroll').eq(page+4).fadeIn(1500);
+
             });
         });
 

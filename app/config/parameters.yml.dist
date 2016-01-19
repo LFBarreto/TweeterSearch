@@ -23,7 +23,7 @@ parameters:
     google_app_secret: nutlPvbR9z_9h_aPngiCtM8G
 
     #Twitter app Key for Auth
-    twitter_consumerkey: BEIMif1u1KqfYuj4FZIc45dA5
-    twitter_consumersecret: 0P4Pt9VzhtE96pCujMPei3h51Wt1nmCFVtVU6YfJZYYb9T3YmK
-    twitter_accesstoken: 4779745332-Y6hRr22amtzXpAOKZWcQInLVuiZtsCfXjythAGt
-    twitter_accesstokensecret: cEI9mnqEZ06BwOxdi8HGx5eUNWVoQiYISso4m2D4R5cKu
+    twitter_consumerkey: e4FJIstUGKme0oQurUpyVtwde
+    twitter_consumersecret: byjKdbVqvDqGOec8mwB4XP3ak9Nlj7B33Cf0K6zPlE0JikgvIM
+    twitter_accesstoken: 4779745332-NtEU1LeeQliZMEONQZHKGg3BbANULCZuW1o1c3B
+    twitter_accesstokensecret: 	iCykMycd7JhJvlVrfavFC6SDj0A78ely4r7xjrS00LpMe

@@ -46,7 +46,7 @@ class DefaultController extends Controller
                 $errors='Une erreur serveur est survenue';
             };
 
-            return $this->render('AppBundle::layout.html.twig',array('message'=>'Les 20 derniers tweet pour:'.$query ,'tweets'=>$tweets, 'errors'=>$errors));
+            return $this->render('AppBundle::layout.html.twig',array('message'=>'Les '.count($tweets).' derniers tweet pour:'.$query ,'tweets'=>$tweets, 'errors'=>$errors));
 
     }
 }
