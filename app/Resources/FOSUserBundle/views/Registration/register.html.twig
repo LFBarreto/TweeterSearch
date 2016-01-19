@@ -6,3 +6,11 @@
 {% block fos_user_content %}
 {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}
+{% block google %}
+    <div class="mdl-card__menu">
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+           href="{{ path('google_login') }}">
+            Google connect
+        </a>
+    </div>
+{% endblock %}

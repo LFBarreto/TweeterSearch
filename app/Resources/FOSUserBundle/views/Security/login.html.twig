@@ -21,10 +21,7 @@
 
         <div class="mdl-grid">
             <div class="mdl-cell--8-col">
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect"
-                   href="{{ path('google_login') }}">
-                    Google Connect
-                </a>
+
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
                 <input class="mdl-textfield__input" type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Nom" />
@@ -48,3 +45,11 @@
 
     </form>
 {% endblock fos_user_content %}
+{% block google %}
+    <div class="mdl-card__menu">
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+           href="{{ path('google_login') }}">
+            Google login
+        </a>
+    </div>
+{% endblock %}

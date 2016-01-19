@@ -4,10 +4,6 @@
 
 <div class="mdl-grid">
     <div class="mdl-cell--6-col">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect"
-           href="{{ path('google_login') }}">
-            Google login
-        </a>
 
         {{ form_errors(form.email) }}
         {{ form_widget(form.email, {'attr': {'class': 'mdl-textfield__input','placeholder':'Email'}}) }}
