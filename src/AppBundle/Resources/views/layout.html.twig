@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <div class="mdl-grid">
+    <div class="mdl-grid" id="top">
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--4dp">
             <div class="mdl-card__title  mdl-color--accent " id="message">
@@ -69,20 +69,25 @@
             {% if (tweets|length/5)>0 %}
                 <div class="mdl-grid">
                     <div class="mdl-layout-spacer"></div>
-                    <button class="mdl-button mdl-button--raised mdl-button--accent next">Suivant</button>
+                    <button  class="mdl-button mdl-button--raised mdl-button--fab mdl-button--accent next"><i class="material-icons">arrow_downward</i></button>
                     <div class="mdl-layout-spacer"></div>
                 </div>
             {% endif %}
+            <div class="mdl-grid">
+                <div class="mdl-layout-spacer"></div>
+                <a href="#top" class="mdl-button mdl-button--raised mdl-button--fab mdl-button--accent top"><i class="material-icons">arrow_upward</i></a>
+                <div class="mdl-layout-spacer"></div>
+            </div>
         {% endif %}
 
 {% endblock %}
 {% block scripts %}
 {% if tweets is defined and tweets is not empty %}
     {% set nbPage=(tweets|length/5) %}
-    {{ nbPage }}
     <script>
         var page=0;
         $('.scroll').hide();
+        $('.top').hide();
         $(document).ready(function(){
             $('.scroll').eq(page).fadeIn(1500);
             $('.next').click(function() {
@@ -90,6 +95,7 @@
                     else {
                         page++;
                         $('.next').hide();
+                        $('.top').show();
                     }
                 $('.scroll').eq(page).fadeIn(1500);
 
